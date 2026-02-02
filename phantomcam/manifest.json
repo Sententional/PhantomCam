@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "PhantomCam",
+  "version": "1.0.0",
+  "description": "Webcam Spoofer",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "declarativeNetRequest",
+    "browsingData"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "images/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": ["<all_urls>"],
+      "js": ["spoofer.js"],
+      "world": "MAIN"
+    },
+    {
+      "run_at": "document_end",
+      "matches": ["<all_urls>"],
+      "js": ["media.js"],
+      "world": "ISOLATED"
+    }
+  ],
+  "icons": {
+    "128": "images/icon128.png",
+    "48": "images/icon48.png"
+  }
+}
